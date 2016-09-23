@@ -3,10 +3,17 @@ package org.mengyun.tcctransaction.spring.recover;
 import org.mengyun.tcctransaction.SystemException;
 import org.mengyun.tcctransaction.recover.TransactionRecovery;
 import org.mengyun.tcctransaction.support.TransactionConfigurator;
+import org.quartz.CronScheduleBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
-import org.springframework.scheduling.quartz.CronTriggerBean;
+//import org.springframework.scheduling.quartz.CronTriggerBean;
+import org.quartz.TriggerBuilder;
+import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
+import org.springframework.scheduling.support.CronTrigger;
+
+import java.util.Properties;
 
 /**
  * Created by changming.xie on 6/2/16.
@@ -29,13 +36,22 @@ public class RecoverScheduledJob {
             jobDetail.setConcurrent(false);
             jobDetail.afterPropertiesSet();
 
-            CronTriggerBean cronTrigger = new CronTriggerBean();
-            cronTrigger.setBeanName("transactionRecoveryCronTrigger");
+//            CronTriggerBean cronTrigger = new CronTriggerBean();
+//            cronTrigger.setBeanName("transactionRecoveryCronTrigger");
+//
+//            cronTrigger.setCronExpression(transactionConfigurator.getRecoverConfig().getCronExpression());
+//            cronTrigger.afterPropertiesSet();
 
-            cronTrigger.setCronExpression(transactionConfigurator.getRecoverConfig().getCronExpression());
-            cronTrigger.afterPropertiesSet();
-
-            scheduler.scheduleJob((JobDetail) jobDetail.getObject(), cronTrigger);
+//            CronTriggerFactoryBean cronTrigger = new CronTriggerFactoryBean();
+//            cronTrigger.setBeanName("transactionRecoveryCronTrigger");
+//            cronTrigger.setCronExpression(transactionConfigurator.getRecoverConfig().getCronExpression());
+//            cronTrigger.afterPropertiesSet();
+//
+//            SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
+//            schedulerFactoryBean.set
+//            schedulerFactoryBean.setTriggers(cronTrigger);
+//
+//            scheduler.scheduleJob((JobDetail) jobDetail.getObject(), cronTrigger);
 
             scheduler.start();
 

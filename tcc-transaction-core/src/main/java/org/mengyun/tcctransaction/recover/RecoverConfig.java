@@ -9,5 +9,5 @@ public interface RecoverConfig {
 
     public int getRecoverDuration();
 
-    public String getCronExpression();
+    public String  getCronExpression();
 }
