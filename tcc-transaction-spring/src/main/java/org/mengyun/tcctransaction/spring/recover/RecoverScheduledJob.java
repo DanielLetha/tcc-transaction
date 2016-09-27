@@ -36,22 +36,13 @@ public class RecoverScheduledJob {
             jobDetail.setConcurrent(false);
             jobDetail.afterPropertiesSet();
 
-//            CronTriggerBean cronTrigger = new CronTriggerBean();
-//            cronTrigger.setBeanName("transactionRecoveryCronTrigger");
-//
-//            cronTrigger.setCronExpression(transactionConfigurator.getRecoverConfig().getCronExpression());
-//            cronTrigger.afterPropertiesSet();
+            CronTriggerFactoryBean cronTrigger = new CronTriggerFactoryBean();
+            cronTrigger.setBeanName("transactionRecoveryCronTrigger");
+            cronTrigger.setCronExpression(transactionConfigurator.getRecoverConfig().getCronExpression());
+            cronTrigger.setJobDetail(jobDetail.getObject());
+            cronTrigger.afterPropertiesSet();
 
-//            CronTriggerFactoryBean cronTrigger = new CronTriggerFactoryBean();
-//            cronTrigger.setBeanName("transactionRecoveryCronTrigger");
-//            cronTrigger.setCronExpression(transactionConfigurator.getRecoverConfig().getCronExpression());
-//            cronTrigger.afterPropertiesSet();
-//
-//            SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
-//            schedulerFactoryBean.set
-//            schedulerFactoryBean.setTriggers(cronTrigger);
-//
-//            scheduler.scheduleJob((JobDetail) jobDetail.getObject(), cronTrigger);
+            scheduler.scheduleJob(jobDetail.getObject(), cronTrigger.getObject());
 
             scheduler.start();
 
